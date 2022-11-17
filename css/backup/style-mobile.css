@@ -1,0 +1,199 @@
+@charset 'utf-8';
+
+/* reset for mobile */
+.pc {display: none !important;}
+br.only-pc {content: '';}
+br.only-pc::after {content: ' ';}
+
+
+/* 전역 변수 설정 */
+:root {
+
+}
+
+
+/* common (include, layout) */
+body {font-family: 'HanSansNeo', '나눔고딕', 'NanumGothic', '맑은 고딕', 'malgun gothic', '돋움', Dotum, 'Apple SD Gothic Neo', Helvetica, sans-serif; font-weight: 400; font-size: 14px; color: #1b2529 ; background: #ffffff; overflow: hidden;}
+#wrapper {max-width: 1200px; margin: 0 auto; overflow: hidden;}
+#skip-nav {position: fixed; left: 0; top: -41px; width: 100%; line-height: 40px; border-bottom: 1px solid rgba(255, 255, 255, 0.7); text-align: center; font-size: 16px; color: #ffffff; background: rgba(0, 0, 0, 0.5); transition: top 0.3s; z-index: 100000;}
+#skip-nav:focus {top: 0;}
+
+#header {position: fixed; left: 0; top: 0; width: 100%; height: 60px; z-index: 10000; transition: background-color 0.3s;}
+#header > div.container {position: relative; max-width: 1200px; height: 100%; margin: 0 auto;}
+#header h1 {position: absolute; left: 20px; top: 50%; transform: translate(0, -50%); width: 87px;}
+#header h1 a {display: block;}
+#header h1 a img:first-child {display: none;}
+#header h1 a img.mobile {display: block;}
+#header a.menu {position: absolute; right: 20px; top: 50%; transform: translate(0, -50%); width: 30px; height: 20px;}
+#header a.menu::before {content: ''; position: absolute; left: 50%; top: 0; transform: translate(-50%, 0); width: 100%; height: 2px; background-color: #ffffff; transition: all 0.3s;}
+#header a.menu > span {position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 100%; height: 2px; background-color: #ffffff; text-indent: -999px; overflow: hidden; transition: all 0.3s;}
+#header a.menu::after {content: ''; position: absolute; left: 50%; bottom: 0; transform: translate(-50%, 0); width: 100%; height: 2px; background-color: #ffffff; transition: all 0.3s;}
+#header a.menu.close::before {top: 50%; transform: translate(-50%, -50%) rotate(30deg); width: 120%;}
+#header a.menu.close > span {opacity: 0;}
+#header a.menu.close::after {bottom: 50%; transform: translate(-50%, 50%) rotate(-30deg); width: 120%;}
+#header > a.search {position: absolute; right: 70px; top: 50%; transform: translate(0, -50%); width: 30px; height: 30px; color: #ffffff; font-size: 20px;}
+#header > a.search i {position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);}
+#header.white {background-color: #ffffff;}
+#header.white h1 a img:first-child {display: block;}
+#header.white h1 a img.mobile {display: none;}
+#header.white a.menu::before {background-color: #1b2529;}
+#header.white a.menu > span {background-color: #1b2529;}
+#header.white a.menu::after {background-color: #1b2529;}
+#header.white > a.search {color: #1b2529;}
+
+#gnb {position: fixed; right: -100%; top: 60px; width: 100%; height: calc(100vh - 60px); padding-top: 40px; padding-bottom: 100px; box-sizing: border-box; background-color: #ffffff; overflow: auto; z-index: 100; font-size: 16px; transition: right 0.3s; z-index: 100;}
+#gnb.on {right: 0;}
+#gnb a {position: relative; display: block; line-height: 20px;}
+#gnb > ul > li + li {margin-top: 30px;}
+#gnb > ul > li > a {font-size: 23px; font-weight: 700; line-height: 30px; padding: 0 20px;}
+#gnb > ul > li > a span.more {position: absolute; right: 20px; top: 50%; transform: translate(-50%, -50%); width: 12px; height: 12px; overflow: hidden; text-indent: -999px;}
+#gnb > ul > li > a span.more::before,
+#gnb > ul > li > a span.more::after {content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 100%; height: 2px; background-color: #1b2529;}
+#gnb > ul > li > a span.more::after {transform: translate(-50%, -50%) rotate(90deg);}
+#gnb > ul > li.open > a span.more::after {transform: translate(-50%, -50%);}
+#gnb > ul > li > ul {overflow: hidden; height: 0;}
+#gnb > ul > li.open > ul {height: auto;}
+#gnb > ul > li > ul > li:first-child {margin-top: 20px;}
+#gnb > ul > li > ul > li + li {margin-top: 20px;}
+#gnb > ul > li > ul > li > a {font-weight: 700; padding-left: 40px;}
+#gnb > ul > li > ul > li > ul > li + li {margin-top: 10px;}
+#gnb > ul > li > ul > li > ul > li:first-child {margin-top: 15px;}
+#gnb > ul > li > ul > li > ul > li > a {padding-left: 60px;}
+
+
+#header div.search-total {display: none;}
+#header ul.top-menu {display: none;}
+
+
+#search-layer {position: fixed; right: -100%; top: 0; width: 100%; height: 100vh; background-color: #ffffff;  box-sizing: border-box; padding-top: 50px; overflow: auto; transition: right 0.3s; z-index: 100;}
+#search-layer.on {right: 0;}
+#search-layer p.keyword {position: relative;}
+#search-layer p.keyword input {width: 100%; height: 42px; box-sizing: border-box; border: 2px solid #000000; border-radius: 100px; font-family: inherit; font-size: 16px; padding: 0 100px 0 25px;}
+#search-layer p.keyword a.delete {position: absolute; right: 60px; top: 50%; transform: translate(0, -50%); width: 18px; display: none;}
+#search-layer p.keyword a.delete.on {display: block;}
+#search-layer p.keyword a.search {position: absolute; right: 20px; top: 50%; transform: translate(0, -50%);}
+#search-layer div.recent {padding: 30px 20px; border-top: 1px solid #bec8cc; border-bottom: 1px solid #bec8cc; position: relative;}
+#search-layer div.recent p.title {font-weight: 700; margin-bottom: 20px; font-size: 20px;}
+#search-layer div.recent ul {color: #90a0a6; font-size: 15px;}
+#search-layer div.recent ul > li + li {margin-top: 15px;}
+#search-layer div.recent ul > li > a:last-child {display: inline-block; width: 18px; height: 18px; background: url(../img/icon/icon-close-circle.png) center center no-repeat; text-indent: -9999px; overflow: hidden; background-size: 100% auto; vertical-align: middle; position: relative; top: -2px; margin-left: 10px;}
+#search-layer div.recent a.delete-all {background: url(../img/icon/icon-trash.png) left center no-repeat; background-size: 15px auto; padding-left: 20px; color: #bec8cc; font-size: 14px; position: absolute; top: 40px; right: 20px;}
+#search-layer div.top10 {padding: 30px 20px; font-size: 16px;}
+#search-layer div.top10 p.title {font-weight: 700; margin-bottom: 20px; font-size: 20px;}
+#search-layer div.top10 ul > li + li {margin-top: 25px;}
+#search-layer div.top10 ul > li > a {display: block; position: relative; padding: 0 40px;}
+#search-layer div.top10 ul > li > a span.rank {position: absolute; left: 0; top: 0; width: 24px; text-align: center;}
+#search-layer div.top10 ul > li > a em {display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+#search-layer div.top10 ul > li > a span.icon {position: absolute; right: 0; top: 0; width: 32px; text-indent: -999px; overflow: hidden; background: url(../img/icon/icon-no-change.png) center center no-repeat;}
+#search-layer div.top10 ul > li > a span.icon.no-change {background-image: url(../img/icon/icon-no-change.png);}
+#search-layer div.top10 ul > li > a span.icon.up {background-image: url(../img/icon/icon-up.png);}
+#search-layer div.top10 ul > li > a span.icon.down {background-image: url(../img/icon/icon-down.png);}
+#search-layer div.top10 ul > li > a span.icon.new {background-image: url(../img/icon/icon-new.png);}
+#search-layer > a.close {position: absolute; right: 0; top: 0; width: 50px;}
+
+
+
+
+
+
+
+
+
+
+/* main */
+#main-visual {position: relative; /* aspect-ratio: 483 / 773;*/ overflow: hidden;}
+#main-visual p.dummy {opacity: 0;}
+#main-visual ul.slide {position: absolute; left: 0; top: 0; width: 100%; height: 100%;}
+#main-visual ul.slide > li {position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: none;}
+#main-visual ul.slide > li:first-child {display: block;}
+#main-visual ul.slide > li > img {width: 100%;}
+#main-visual ul.slide > li div.content {position: absolute; left: 0; bottom: 100px; width: 100%; text-align: center;}
+#main-visual ul.slide > li div.content > * {display: block;}
+#main-visual ul.slide > li div.content span {font-size: 13px;}
+#main-visual ul.slide > li div.content em {font-size: 30px; margin: 15px 0; font-weight: 700; line-height: 1.3em;}
+#main-visual ul.slide > li div.content a {font-size: 14px; font-weight: 700;}
+#main-visual ul.slide > li div.content a::after {content: '\f061'; font-family: 'Font Awesome 6 Free'; font-weight: 700;}
+#main-visual div.controller a.prev,
+#main-visual div.controller a.next {position: absolute; top: 50%; transform: translate(0, -50%); width: 20px; height: 40px; background: url(../img/icon/icon-left-black.png) center center no-repeat; overflow: hidden; text-indent: -999px; z-index: 10;}
+#main-visual div.controller a.prev {left: 20px;}
+#main-visual div.controller a.next {right: 20px; background-image: url(../img/icon/icon-right-black.png);}
+#main-visual div.controller div.indicator {position: absolute; left: 50%; bottom: 30px; transform: translate(-50%, 0); width: 70%; height: 10px;}
+#main-visual div.controller div.indicator span.bar {position: absolute; left: 0; top: 50%; transform: translate(0, -50%); width: calc(100% - 30px); height: 2px; border-radius: 10px; background-color: rgba(255, 255, 255, 0.4);}
+#main-visual div.controller div.indicator span.bar span {position: absolute; left: 0; top: 0; height: 100%; width: 16.7%; background-color: #000000; border-radius: 10px; overflow: hidden; text-indent: -999px;}
+#main-visual div.controller div.indicator a.play {position: absolute; right: 0; top: 0; width: 8px; height: 100%; background: url(../img/icon/icon-play-black.png) center center no-repeat; background-size: 100% auto; overflow: hidden; text-indent: -999px;}
+#main-visual div.controller div.indicator a.play span:first-child {display: inline;}
+#main-visual div.controller div.indicator a.play span:last-child {display: none;}
+#main-visual div.controller div.indicator a.play.on {background-image: url(../img/icon/icon-pause-black.png);}
+#main-visual div.controller div.indicator a.play.on span:first-child {display: none;}
+#main-visual div.controller div.indicator a.play.on span:last-child {display: inline;}
+#main-visual.white ul.slide > li div.content {color: #ffffff;}
+#main-visual.white div.controller a.prev {background-image: url(../img/icon/icon-left-white.png);}
+#main-visual.white div.controller a.next {background-image: url(../img/icon/icon-right-white.png);}
+#main-visual.white div.controller div.indicator span.bar span {background-color: #ffffff;}
+#main-visual.white div.controller div.indicator a.play {background-image: url(../img/icon/icon-play-white.png);}
+#main-visual.white div.controller div.indicator a.play.on {background-image: url(../img/icon/icon-pause-white.png);}
+
+
+
+
+
+
+
+
+
+
+/*
+
+animation 축약 표현
+animation: main-bg-animation 3s ease-out 0.1s 1 normal forwards running;
+animation: name duration timing-function delay iteration-count direction fill-mode play-state
+duration: 0(default), time, initial, inherit
+timing-function: ease(default), linear, ease-in, ease-out, ease-in-out, step-start, step-end, steps(int, start|end), cubic-bezier(n, n, n, n), initial, inherit
+deley: 0s(default), time, initial, inherit
+direction: normal(default), reverse, alternate, alternate-reverse, initial, inherit
+iteration-count: 1(default), number, infinite, initial, inherit
+fill-mode: none(default), forwards, backwards, both, initial, inherit
+play-state: running(default), paused, initial, inherit  (IE에서는 축약표현에 포함시 동작하지 않음, 별도로 사용)
+
+[최종 사용 예시]
+animation: main-bg-animation 3s ease-out 0s 1 normal forwards;
+animation-play-state: running;
+
+@keyframes main-bg-animation {
+    0% {opacity: 1; transform: rotate(0) scale(1);}
+    100% {opacity: 0; transform: rotate(-3deg) scale(1.2);}
+}
+
+[최종 사용 예시]
+.custom-scroll {overflow: auto; scrollbar-width: thin; scrollbar-color: #e0e0e0; -ms-overflow-style: none;}    /* firefox, IE 고려
+.custom-scroll::-webkit-scrollbar {width: 6px;}
+.custom-scroll::-webkit-scrollbar-thumb {background-color: transparent; border-radius: 10px;}
+.custom-scroll:hover::-webkit-scrollbar-thumb {background-color: rgba(0, 0, 0, 0.2);}
+.custom-scroll::-webkit-scrollbar-track {background-color: transparent;}
+
+[fontawesome css 입력]
+#main-visual ul.slide > li div.content a::after {content: '\f061'; font-family: 'Font Awesome 6 Free'; font-weight: 700;}
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

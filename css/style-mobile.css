@@ -1,0 +1,145 @@
+@charset 'utf-8';
+
+/* reset for mobile */
+.pc {display: none !important;}
+br.only-pc {content: '';}
+br.only-pc::after {content: ' ';}
+
+
+/* 전역 변수 설정 */
+:root {
+
+}
+
+
+/* common (include, layout) */
+body {font-family: 'HanSansNeo', '나눔고딕', 'NanumGothic', '맑은 고딕', 'malgun gothic', '돋움', Dotum, 'Apple SD Gothic Neo', Helvetica, sans-serif; font-weight: 400; font-size: 14px; color: #1b2529 ; background: #ffffff; z-index: 100000;}
+#wrapper {min-width: 320px; max-width: 1024px; margin: 0 auto; overflow: hidden;}/* 모바일은 화면 밖으로 밀려 숨어있는거 많음 꼭 오버플로워히든처리하기(마지막에 하기) */
+#wrapper.mask {height: 100vh;}
+#wrapper.mask::after {content: ''; position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.3); z-index: 100;}/* 배경화면 마스킹처리 */
+#skip-nav {position: fixed; left: 0; top: -40px; width: 100%; line-height: 40px; text-align: center; background-color: rgba(0, 0, 0, 0.6); color: #ffffff; font-size: 16px; transition: top 0.3s; z-index: 100000;}
+#skip-nav:focus {top: 0;}
+
+
+#header {position: fixed; left: 0; top: 0; width: 100%; height: 60px; z-index: 100000;}
+#header h1 {position: absolute; left: 20px; top: 50%; transform: translate(0, -50%);}
+#header h1 a {display: block;}
+#header h1 a img {display: block; height: 20px;}/* 이미지도 글자로인식, 폰트크기가 엄청 큼//하이트를 줘야 이미지가 줄어듬 */
+#header h1 a img:first-child {position: absolute; opacity: 0;}/* 이미지 두개 포개고 첫이미지를 투명하게 처리해서 뒤에영역 보이게 */
+/* 햄버거메뉴 */
+#header a.menu {position: absolute; right: 20px; top: 50%; transform: translate(0, -50%); width: 28px; height: 20px;}
+#header a.menu::before {content: ''; position: absolute; left: 50%; top: 0; transform: translate(-50%, 0); width: 100%; height: 2px; background-color: #ffffff; transition: all 0.3s;}
+#header a.menu span {position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 100%; height: 2px; background-color: #ffffff; overflow: hidden; text-indent: -999px;  transition: all 0.3s}}
+#header a.menu::after {content: ''; position: absolute; left: 50%; bottom: 0; transform: translate(-50%, 0); width: 100%; height: 2px; background-color: #ffffff; transition: all 0.3s;}
+
+#header a.menu.close::before {top: 50%; transform: translate(-50%, -50%) rotate(35deg); width: 120%;}
+#header a.menu.close span {opacity: 0;}
+#header a.menu.close::after {bottom: 50%; transform: translate(-50%, 50%) rotate(-35deg); width: 120%;}
+
+#gnb {position: fixed; right: 100%; top: 60px; width: 100%; height:calc(100% - 60px) ; background-color: #ffffff; overflow: auto; padding: 30px 20px 100px 20px; font-size: 16px; transition: right 0.3s;}/* 아주 중요 top만큼 calc줘서 빼주기 꼭!!! overflow: auto;꼭 지정해주기 //스크롤바생김*/
+#gnb.open {right: 0;}
+#gnb a {display: block;}
+#gnb > ul {border-bottom: 1px solid #f2f4f5;}
+#gnb > ul > li {border-top: 1px solid #f2f4f5;}
+#gnb > ul > li > a {line-height: 50px; font-size: 22px; font-weight: 700; background-color: yellow;}
+#gnb > ul > li > ul {overflow: hidden; height: 0;}
+#gnb > ul > li > ul > li + li {margin-top: 3px;}
+#gnb > ul > li > ul > li > a {line-height: 40px; font-weight: 700; background-color: pink;}
+#gnb > ul > li > ul > li > ul {overflow: hidden; height: 0;}
+#gnb > ul > li > ul > li > ul > li + li {margin-top: 3px;}
+#gnb > ul > li > ul > li > ul > li > a {line-height: 30px; padding-left: 30px; background-color: lime;}
+
+
+#header div.search-total {display: none;}/* 작업후 디스플레이 논 */
+#header ul.icon-menu {display: none;}
+
+
+#header a.open-search {position: absolute; right: 64px; top: 50%; transform: translate(0, -50%); color: #ffffff; font-size: 20px;}
+#header a.open-search i {display: block;}/* 글시로 인식됨, display block줌 */
+
+#search-total {position: fixed; right: 0; top: 0; width: 100%; height: 100%; background-color: #ffffff; overflow: auto; padding-bottom: 100px; transition: right 0.3s;}
+#search-total.open {right: 0;}
+#search-total div.search {position: relative; background-color: pink; margin:60px 20px 30px 20px; width: calc(100% - 40px);}
+#search-total div.search label {position: absolute; left: -9999px;}
+#search-total div.search input {font: inherit; font-size: 16px; width: 100%; height: 42px; border: 2px solid #1b2529; border-radius: 50px; padding: 0 100px 0 30px; appearance: none; transition: all 0.3s; outline: none;}
+#search-total div.search input:focus {border-color: #00a8e3; outline: 3px solid rgba(0, 168, 227, 0.2);}
+#search-total div.search > a {position: absolute; right: 0; top: 50%; transform: translate(0, -50%);}
+#search-total div.search > a.delete {right: 60px; width: 20px; display: none;}
+#search-total div.search > a.search {right: 20px;}
+#search-total div.search ul {position: absolute; left: 20px; top: calc(100% + 40px); width: calc(100% - 40px); max-height: 420px; background-color: #ffffff; z-index: 10; overflow: auto; display: none;}
+#search-total div.search ul > li + li {margin-top: 10px;}
+#search-total div.search ul > li > a {display: block; line-height: 30px; font-size: 16px;}
+#search-total div.search ul > li > a em {color: #00a8e3;}
+
+
+#search-total div.recent {position: relative; font-size: 15px; color: #90a0a6; padding: 0 20px 80px 20px; border-bottom: 1px solid #f2f4f5; background-color: pink;}
+#search-total div.recent p.title {font-size: 16px; font-weight: 700; margin-bottom: 30px; color: #1b2529;}
+#search-total div.recent ul > li.no-info {display: none;}
+#search-total div.recent ul > li {position: relative; padding-right: 50px;}
+#search-total div.recent ul > li + li {margin-top: 15px;}
+#search-total div.recent ul > li > a:first-child {display: inline-block; line-height: 20px; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+#search-total div.recent ul > li > a:last-child {position: absolute; top: 50%; transform: translate(0, -50%); margin-left: 20px; width: 20px; height: 20px; background: url(../img/icon/icon-close-circle.png) center center no-repeat; background-size: 20px auto; overflow: hidden; text-indent: -999px; vertical-align: middle;}
+#search-total div.recent a.delete-all {position: absolute; bottom: 0; color: #bec8cc; font-size: 14px; padding-left: 20px; background: url(../img/icon/icon-trash.png) left center no-repeat; background-size: auto 14px;}
+
+#search-total div.rank {position: relative; font-size: 16px; padding: 30px 20px; border-bottom: 1px solid #f2f4f5; background-color: yellow;}
+#search-total div.rank p.title {font-size: 16px; font-weight: 700; margin-bottom: 30px;}
+#search-total div.rank ul > li + li {margin-top: 20px;}
+#search-total div.rank ul > li > a {display: block; position: relative; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 60px 0 50px;}
+#search-total div.rank ul > li > a span.rank {position: absolute; left: 0; width: 20px; text-align: center; font-weight: 700;}
+#search-total div.rank ul > li > a span.icon {position: absolute; right: 0; top: 50%; transform: translate(0, -50%); width: 40px; height: 20px; background: url(../img/icon/icon-no-change.png) center center no-repeat; overflow: hidden; text-indent: -999px;}
+#search-total div.rank ul > li > a span.icon.up {background-image: url(../img/icon/icon-up.png);}
+#search-total div.rank ul > li > a span.icon.down {background-image: url(../img/icon/icon-down.png);}
+#search-total div.rank ul > li > a span.icon.new {background-image: url(../img/icon/icon-new.png);}
+
+#search-total a.close {position: absolute; right: 0; top: 0; width: 50px;}
+
+
+#header div.function {display: none;}
+
+
+
+
+/* main */
+#main-visual {position: relative; overflow: hidden;} /* 더미깔고 하이트 지우기 ..밑장깔기*/
+#main-visual p.dummy {opacity: 0;}/* 더미깔때 사용 */
+#main-visual p.dummy img {width: 100%;} /* 작은이미지 올때 같이 움직이게 사용 */
+#main-visual ul.slide {position: absolute; left: 0; top: 0; width: 100%; height: 100%;}
+#main-visual ul.slide > li {position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: none;}
+#main-visual ul.slide > li:first-child {display: block;}
+#main-visual ul.slide > li > img {width: 100%;}
+#main-visual ul.slide > li a {position: absolute; left: 0; bottom: 100px; font-size: 16px; z-index: 10; text-align: center; }
+#main-visual ul.slide > li em {font-size: 30px; font-weight: 700; margin: 20px 0 40px 0; display: block;}
+#main-visual ul.slide > li span.link {font-size: 15px; font-weight: 700;}
+#main-visual ul.slide > li span.link::after {content: '\f061'; font-family: 'Font Awesome 6 Free'; font-weight: 700; margin-left: 10px;}
+#main-visual div.indicator {position: absolute; width: 60%; height: 20px; left: 50%; transform: translate(-50%, 0); bottom: 20px; z-index: 10;}
+#main-visual div.indicator span.bar {position: absolute; left: 0; top: 50%; transform: translate(0, -50%); width: calc(100% - 20px); height: 2px; background-color: rgba(255, 255, 255, 0.5); border-radius: 10px; overflow: hidden;}
+#main-visual div.indicator span.bar em {position: absolute; left: 0; width: 14.4%; height: 100%; background-color: #1b2529; border-radius: 10px; text-indent: -9999px;}
+#main-visual div.indicator a.play {position: absolute; right: 0; top: 0; width: 20px; height: 100%; font-size: 12px;}
+#main-visual div.indicator a.play i {position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);}
+#main-visual div.indicator a.play i.start {display: block;}
+#main-visual div.indicator a.play i.pause {display: none;}
+#main-visual div.indicator a.play.on i.start {display: none;}
+#main-visual div.indicator a.play.on i.pause {display: block;}
+/* #main-visual p.control {position: absolute; left: 50%; top: 0; transform: translate(-50%, 0); width: 1400px; max-width: 100vw; height: 100%;} */
+#main-visual p.control a {position: absolute; top: 50%; transform: translate(0, -50%); width: 20px; height: 40px; background: url(../img/icon/icon-left-black.png) center center no-repeat; overflow: hidden; text-indent: -999px;}
+#main-visual p.control a.prev {left: 10px; background-image: url(../img/icon/icon-left-black.png);}
+#main-visual p.control a.next {right: 10px; background-image: url(../img/icon/icon-right-black.png);}
+#main-visual.white {color: #ffffff;}
+#main-visual.white div.indicator span.bar em {background-color: #ffffff;}
+#main-visual.white p.control a.prev {background-image: url(../img/icon/icon-left-white.png);}
+#main-visual.white p.control a.next {background-image: url(../img/icon/icon-right-white.png);}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
